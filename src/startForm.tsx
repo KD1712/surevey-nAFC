@@ -66,7 +66,7 @@ const Forms = () => {
   const handleSelectChange = (event: any) => {
     setNationality(event.target.value);
   };
-  const numbers = [6, 2, 4,];
+  const numbers = [6, 2, 4];
   // Randomly select an integer from the array
   const randomIndex = Math.floor(Math.random() * numbers.length);
   const nAFC = numbers[randomIndex];
@@ -83,14 +83,14 @@ const Forms = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        mt: 15,
+        mt: { xs: 2, sm: 15, md: 15, lg: 15 },
       }}
     >
       <Typography
         variant="h4"
         component="h2"
-        gutterBottom
-        sx={{ textAlign: "center" }}
+        // gutterBottom
+        sx={{ textAlign: "center", fontSize: { xs: 23 } }}
       >
         Tell us a bit about yourself
       </Typography>
@@ -157,8 +157,7 @@ const Forms = () => {
             ))}
           </Select>
         </FormControl>
-        {age && gender && nationality && education 
-        ? (
+        {age && gender && nationality && education ? (
           <Button
             sx={{ mt: 2, fontWeight: 700 }}
             variant="contained"

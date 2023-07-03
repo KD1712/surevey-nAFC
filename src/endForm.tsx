@@ -34,7 +34,11 @@ const EndForm = () => {
         textAlign: "center",
       }}
     >
-      <Typography variant="h3" component="h2" gutterBottom>
+      <Typography
+        variant="h3"
+        component="h2"
+        sx={{ textAlign: "center", fontSize: { xs: 25 } }}
+      >
         Share your Feedback
       </Typography>
       <Box
@@ -46,7 +50,12 @@ const EndForm = () => {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h5">Rate Your Experience:</Typography>
+        <Typography
+          variant="h5"
+          sx={{ textAlign: "center", fontSize: { xs: 20 } }}
+        >
+          Rate Your Experience:
+        </Typography>
         <Rating
           name="survey-rating"
           value={rating}
@@ -63,7 +72,7 @@ const EndForm = () => {
           mt: 4,
           p: 2,
           // width: '35%' ,
-          width: { xs: "80%", sm: "80%", md: "60%", lg: "35%" },  
+          width: { xs: "80%", sm: "80%", md: "60%", lg: "35%" },
         }}
       >
         <TextField

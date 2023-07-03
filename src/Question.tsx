@@ -22,6 +22,7 @@ const questionArrayCreation = () => {
     const question = {
       id: i + 1,
       image: `/assets/${numbers[i]}.jpg`,
+      image2: `/assets1/${numbers[i]}.jpg`,
     };
     questions.push(question);
   }
@@ -149,14 +150,18 @@ const Question = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: { xs: "left", sm: "center" },
+          justifyContent: { xs: "start", sm: "center" },
           alignItems: "center",
           position: "relative",
           width: "100%",
-          mt:1,
+          mt: 1,
         }}
       >
-        <Typography variant="h4" component="h2">
+        <Typography
+          // variant="h4"
+          sx={{ fontSize: { xs: 20, sm: 22, md: 28, lg: 35 } }}
+          //  component="h2"
+        >
           Select The Image You Like!
         </Typography>
         <Box
@@ -164,11 +169,16 @@ const Question = () => {
             borderRadius: 4,
             padding: "0.25rem .5rem",
             position: "absolute",
-            right: 10,
+            right: 2,
             backgroundColor: "lightgray",
+            // top: { xs: "2.3rem" },
+            justifyContent: { xs: "end", sm: "end" },
           }}
         >
-          <Typography variant="body1" sx={{ fontSize: 26 }}>
+          <Typography
+            variant="body1"
+            sx={{ fontSize: { xs: 16, sm: 20, md: 25, lg: 25 } }}
+          >
             {formatTime(timer)}
           </Typography>
         </Box>
@@ -178,21 +188,25 @@ const Question = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          m: 1,
+          mb: { xs: 2, sm: 1.5, md: 1, lg: .5 },
+          mt: { xs: 2, sm: 1.5, md: 1, lg: 2},
           width:
-            conditionalAFC === 2 ? { xs: "100%", sm: "80%", md: "70%", lg:'80%' } :
-            conditionalAFC === 4 ? { xs: "100%", sm: "80%", md: "60%", lg:'50%' } : 
-            { xs: "100%", sm: "80%", md: "80%", lg:'80%' } ,
+            conditionalAFC === 2
+              ? { xs: "95%", sm: "80%", md: "70%", lg: "80%" }
+              : conditionalAFC === 4
+              ? { xs: "100%", sm: "80%", md: "60%", lg: "50%" }
+              : { xs: "90%", sm: "80%", md: "80%", lg: "80%" },
 
           alignItems: "center",
         }}
       >
         <Grid
           container
-          spacing={6}
+          // spacing={6}
+          spacing={{ xs: 1, sm: 4, md: 6, lg: 5 }}
           sx={{
             flexWrap: { sm: "wrap", md: "wrap" },
-            // m: 2,
+           
           }}
         >
           {questions
@@ -202,7 +216,7 @@ const Question = () => {
                 item
                 xs={conditionalAFC === 2 ? 12 : 6}
                 sm={6}
-                md={6}
+                md={conditionalAFC === 4 ? 6 : conditionalAFC === 6 ? 4 : 6}
                 lg={conditionalAFC === 6 ? 4 : 6}
                 key={question.id}
               >
@@ -214,10 +228,10 @@ const Question = () => {
                           ? "120px"
                           : conditionalAFC === 4
                           ? "140px"
-                          : "200px",
+                          : "175px",
                       sm:
                         conditionalAFC === 6
-                          ? "200px"
+                          ? "180px"
                           : conditionalAFC === 4
                           ? "200px"
                           : "200px",
@@ -229,9 +243,9 @@ const Question = () => {
                           : "320px",
                       lg:
                         conditionalAFC === 6
-                          ? "300px"
+                          ? "270px"
                           : conditionalAFC === 4
-                          ? "300px"
+                          ? "270px"
                           : "450px",
                     },
                     height: {
@@ -240,10 +254,10 @@ const Question = () => {
                           ? "120px"
                           : conditionalAFC === 4
                           ? "140px"
-                          : "200px",
+                          : "175px",
                       sm:
                         conditionalAFC === 6
-                          ? "200px"
+                          ? "180px"
                           : conditionalAFC === 4
                           ? "200px"
                           : "200px",
@@ -255,9 +269,9 @@ const Question = () => {
                           : "320px",
                       lg:
                         conditionalAFC === 6
-                          ? "300px"
+                          ? "270px"
                           : conditionalAFC === 4
-                          ? "300px"
+                          ? "270px"
                           : "450px",
                     },
                     background: "white",
@@ -353,7 +367,7 @@ const Question = () => {
       <LinearProgress
         variant="determinate"
         value={calculateProgress()}
-        sx={{ mt: 2, width: "50%", height: ".5rem" }}
+        sx={{ mt: 1.5, width: "50%", height: ".5rem" }}
       />
     </Box>
   );
