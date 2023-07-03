@@ -19,11 +19,22 @@ const questionArrayCreation = () => {
     numbers[j] = temp;
   }
   for (let i = 0; i < N; i++) {
-    const question = {
-      id: i + 1,
-      image: `/assets/${numbers[i]}.jpg`,
-      image2: `/assets1/${numbers[i]}.jpg`,
-    };
+    let question = {};
+    if (i % 2 === 0) {
+      question = {
+        id: i + 1,
+        image: `/assets/${numbers[i]}.jpg`,
+        // image: `src/assets1/${numbers[i]}.jpg`,
+
+      };
+    } else {
+      question = {
+        id: i + 1,
+        image: `/assets1/${numbers[i]}.jpg`,
+        // image2: `src/assets1/${numbers[i]}.jpg`,
+      };
+    }
+
     questions.push(question);
   }
 };
@@ -55,6 +66,7 @@ const Question = () => {
 
   useEffect(() => {
     questionArrayCreation();
+    console.log(questions, "questions");
     setRatingCondition(state.condition);
   }, [state.condition]);
 
@@ -159,7 +171,10 @@ const Question = () => {
       >
         <Typography
           // variant="h4"
-          sx={{ fontSize: { xs: 20, sm: 22, md: 28, lg: 35 } }}
+          sx={{
+            fontSize: { xs: 20, sm: 22, md: 28, lg: 35 },
+            px: { xs: 2 },
+          }}
           //  component="h2"
         >
           Select The Image You Like!
@@ -188,8 +203,8 @@ const Question = () => {
         sx={{
           display: "flex",
           justifyContent: "center",
-          mb: { xs: 2, sm: 1.5, md: 1, lg: .5 },
-          mt: { xs: 2, sm: 1.5, md: 1, lg: 2},
+          mb: { xs: 2, sm: 1.5, md: 1, lg: 0.5 },
+          mt: { xs: 2, sm: 1.5, md: 1, lg: 2 },
           width:
             conditionalAFC === 2
               ? { xs: "95%", sm: "80%", md: "70%", lg: "80%" }
@@ -206,7 +221,6 @@ const Question = () => {
           spacing={{ xs: 1, sm: 4, md: 6, lg: 5 }}
           sx={{
             flexWrap: { sm: "wrap", md: "wrap" },
-           
           }}
         >
           {questions

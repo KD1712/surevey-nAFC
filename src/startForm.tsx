@@ -171,7 +171,7 @@ const Forms = () => {
               // condition: ratingcondition,
               timestamp: timestamp,
               sessionId: uuidv4(),
-              condition: nAFC,
+              condition: 6,
             }}
             color="primary"
             type="submit"
