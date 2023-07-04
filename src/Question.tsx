@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Button, LinearProgress, Typography } from "@mui/material";
-
+import { useTheme } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
@@ -40,6 +40,9 @@ const questionArrayCreation = () => {
 };
 
 const Question = () => {
+
+  const theme = useTheme();
+
   const { state } = useLocation();
 
   const [timer, setTimer] = useState(600); // 10 minutes in secondsf
@@ -58,18 +61,19 @@ const Question = () => {
 
   const conditionalAFC = state.condition;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [ratingcondition, setRatingCondition]: any = useState("");
-
+  
+  // const [ratingcondition, setRatingCondition]: any = useState("");
+  
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     questionArrayCreation();
     console.log(questions, "questions");
-    setRatingCondition(state.condition);
+    // setRatingCondition(state.condition);
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.condition]);
-
+  
   useEffect(() => {
     if (currentQuestionIndex === questions.length - conditionalAFC) {
       navigate("/endForm", {
@@ -105,6 +109,34 @@ const Question = () => {
   }, [timer]);
 
   const handleLikeDislike = (action: any) => {
+    if (currentQuestionIndex <= questions.length - 1) {
+      const currentTime = (600 - timer) * 1000;
+      const response = {
+        responseTime: currentTime,
+        answer: action,
+        fName1: questions[currentQuestionIndex].image,
+      };
+      //add image name, user's age, nationality,
+      setResponses((prevResponses) => [...prevResponses, response]);
+    }
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  };
+
+  const handleRatingChange = (value: any) => {
+    if (currentQuestionIndex <= questions.length - 1) {
+      const currentTime = (600 - timer) * 1000;
+      const response = {
+        responseTime: currentTime,
+        answer: value,
+        fName1: questions[currentQuestionIndex].image,
+      };
+      //add image name, user's age, nationality,
+      setResponses((prevResponses) => [...prevResponses, response]);
+    }
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  };
+
+  const handleAFC = (action: any) => {
     if (currentQuestionIndex <= questions.length - 1) {
       const currentTime = (600 - timer) * 1000;
       const response = {
@@ -215,6 +247,8 @@ const Question = () => {
           alignItems: "center",
         }}
       >
+      { 
+      conditionalAFC === 2 || conditionalAFC === 4 || conditionalAFC === 6 ? 
         <Grid
           container
           // spacing={6}
@@ -295,7 +329,7 @@ const Question = () => {
                       boxShadow: `0px 0px 2px 2px green`,
                     },
                   }}
-                  onClick={() => handleLikeDislike(question.id)}
+                  onClick={() => handleAFC(question.id)}
                 >
                   <img
                     src={question.image}
@@ -311,67 +345,94 @@ const Question = () => {
               </Grid>
             ))}
         </Grid>
-      </Box>
-      {/* {ratingcondition === "likeDislike" ? (
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-          <Button
-            variant="contained"
-            color="success"
-            size="large"
-            sx={{ fontWeight: 700 }}
-            onClick={() => handleLikeDislike("Like")}
-          >
-            Like 👍
-          </Button>
-          <Button
-            variant="contained"
-            color="error"
-            size="large"
-            onClick={() => handleLikeDislike("Dislike")}
-            sx={{ ml: 2, fontWeight: 700 }}
-          >
-            Dislike 👎
-          </Button>
-        </Box>
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            // justifyContent: "space-between",
-            flexWrap: theme.breakpoints.only("sm") ? "wrap" : "none",
-            alignItems: "center",
-            justifyContent: "center",
-            // mt: 2,
-            p: 2,
-          }}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-            <Button
-              key={value}
-              variant="contained"
-              size="medium"
-              // color={ratingMethod === "star" ? "secondary" : "primary"}
-              onClick={() => handleRatingChange(value)}
+      :
+        conditionalAFC === 0 ? 
+          <Box>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+              <img
+                src={questions[currentQuestionIndex].image}
+                alt={`Question ${questions[currentQuestionIndex].id}`}
+                style={{
+                  height: 400,
+                  width: theme.breakpoints.only("md") ? "80%" : "100%",
+                  border: "1.5px solid black",
+                }}
+              />
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+              <Button
+                variant="contained"
+                color="success"
+                size="large"
+                sx={{ fontWeight: 700 }}
+                onClick={() => handleLikeDislike("Like")}
+              >
+                Like 👍
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                size="large"
+                onClick={() => handleLikeDislike("Dislike")}
+                sx={{ ml: 2, fontWeight: 700 }}
+              >
+                Dislike 👎
+              </Button>
+            </Box> 
+          </Box>
+           : 
+          <Box>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+              <img
+                src={questions[currentQuestionIndex].image}
+                alt={`Question ${questions[currentQuestionIndex].id}`}
+                style={{
+                  height: 400,
+                  width: theme.breakpoints.only("md") ? "80%" : "100%",
+                  border: "1.5px solid black",
+                }}
+              />
+            </Box>
+            <Box
               sx={{
-                marginTop: ".3rem",
-                marginLeft: ".4rem",
-                backgroundColor: "white",
-                color: "black",
-                fontSize: "20px",
-                fontWeight: "700",
-                border: "1px solid black",
-                "&:hover": {
-                  backgroundColor: "lightblue",
-                  boxShadow: "none",
-                },
+                display: "flex",
+                // justifyContent: "space-between",
+                flexWrap: theme.breakpoints.only("sm") ? "wrap" : "none",
+                alignItems: "center",
+                justifyContent: "center",
+                // mt: 2,
+                p: 2,
               }}
             >
-              {value}
-            </Button>
-          ))}
-        </Box>
-      )} */}
-
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                <Button
+                  key={value}
+                  variant="contained"
+                  size="medium"
+                  // color={ratingMethod === "star" ? "secondary" : "primary"}
+                  onClick={() => handleRatingChange(value)}
+                  sx={{
+                    marginTop: ".3rem",
+                    marginLeft: ".4rem",
+                    backgroundColor: "white",
+                    color: "black",
+                    fontSize: "20px",
+                    fontWeight: "700",
+                    border: "1px solid black",
+                    "&:hover": {
+                      backgroundColor: "lightblue",
+                      boxShadow: "none",
+                    },
+                  }}
+                >
+                  {value}
+                </Button>
+              ))}
+            </Box>
+          </Box>
+          
+      }
+    </Box>
       {/* <Box sx={{ display: 'flex', alignItems: 'center', mt: 4, width: '80%' }}>
         <CircularProgress variant="determinate" value={timer / 60} size={96} thickness={4} />
         <Typography variant="body1" component="span" sx={{ ml: 2, fontSize: 20 }}>

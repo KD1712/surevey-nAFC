@@ -29,11 +29,14 @@ const Forms = () => {
   // const [myData, setMyData] = React.useState([{}]);
   const [countries, setCountries] = useState<Country[]>([]);
   // const [selectedCountry, setSelectedCountry] = useState("");
-  // const [ratingcondition, setRatingCondition]: any = useState("");
+  const [ratingcondition, setRatingCondition]: any = useState("");
   const [timestamp, setTimestamp] = useState("");
 
+
+  const numbers:any = [0, 1, 6, 2, 4];
+  const randomIndex = Math.floor(Math.random() * numbers.length);
   useEffect(() => {
-    // setRatingCondition(Math.random() < 0.5 ? "likeDislike" : "ratings");
+    setRatingCondition(numbers[randomIndex]);
     // setTimestamp(new Date().toLocaleString())
     const options = {
       year: "numeric",
@@ -47,7 +50,9 @@ const Forms = () => {
 
     const formattedTime = new Date().toLocaleString([], options);
     setTimestamp(formattedTime);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // console.log(ratingcondition);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -56,25 +61,22 @@ const Forms = () => {
     try {
       const response = await fetch(
         "https://trial.mobiscroll.com/content/countries.json"
-      );
-      const data = await response.json();
-      setCountries(data as Country[]);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-  const handleSelectChange = (event: any) => {
-    setNationality(event.target.value);
-  };
-  const numbers = [6, 2, 4];
-  // Randomly select an integer from the array
-  const randomIndex = Math.floor(Math.random() * numbers.length);
-  const nAFC = numbers[randomIndex];
-  // Output the randomly selected integer
-  // console.log(randomInteger,'INT');
-
-  useEffect(() => {
-    fetchData();
+        );
+        const data = await response.json();
+        setCountries(data as Country[]);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    const handleSelectChange = (event: any) => {
+      setNationality(event.target.value);
+    };
+    // Output the randomly selected integer
+    // console.log(randomInteger,'INT');
+    
+    useEffect(() => {
+      fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -171,7 +173,7 @@ const Forms = () => {
               // condition: ratingcondition,
               timestamp: timestamp,
               sessionId: uuidv4(),
-              condition: nAFC,
+              condition: ratingcondition,
             }}
             color="primary"
             type="submit"
