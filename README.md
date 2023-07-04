@@ -1,7 +1,12 @@
 # Survey App
-This app is made to findout which UI layout is best out of the 5 layouts. 
-User will be randomly assigned a layout out of "Like Dislike","Rating","n-AFC (2,4,6)" when user starts survey.
+This app is made to find out which UI layout is best out of the 5 layouts. 
+Users will be randomly assigned a layout out of "Like Dislike", "Rating", and"n-AFC (2,4,6)" when a user starts the survey.
+
+##Code Flow
+In the src folder, there are 5 pages: Welcome, startForm, Question, endForm, and end page, and all its components are created in it. With the naming conventions, it would be easy to predict the flow of the app.
+
 ## Getting Started with Create React App
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
