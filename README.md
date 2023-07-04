@@ -5,6 +5,22 @@ Users will be randomly assigned a layout out of "Like Dislike", "Rating", and"n-
 ## Code Flow
 In the src folder, there are 5 pages: Welcome, startForm, Question, endForm, and end page, and all its components are created in it. With the naming conventions, it would be easy to predict the flow of the app.
 
+## Code Description 
+    Welcome.tsx:
+        The welcome page serves as the initial screen of the application. It displays a welcome message and provides an introduction to the quiz or application. Users can typically find a "Start" button or a similar call-to-action to begin the quiz or proceed to the main content.
+
+    StartForm.tsx:
+        The start form page is presented after the welcome screen. It prompts users to provide their name or any other required information before starting the quiz or accessing the main content. Users are typically required to fill in the form and submit it to proceed.
+
+    Question.tsx:
+        The question page displays a single question from the quiz or a series of questions. Users can see the question text and may be presented with options or input fields to provide their answers or selections. This page is typically part of a larger set of questions and allows users to navigate through the quiz.
+
+    EndForm.tsx:
+        The end form page is shown after the user completes the quiz or reaches the end of the content. It often includes a form where users can provide additional feedback, submit their scores, or perform any required actions. This page allows users to provide their final input before concluding their interaction with the application.
+
+    End.tsx:
+        The end page is the final screen of the quiz or application. It displays a closing message, summary of the user's performance or results, and may provide options for sharing the results or taking further actions. This page is usually used to wrap up the user's experience and provide a sense of completion.
+
 ## Getting Started with Create React App
 
 
