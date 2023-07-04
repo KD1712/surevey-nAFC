@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Survey App
+This app is made to findout which UI layout is best out of the 5 layouts. 
+User will be randomly assigned a layout out of "Like Dislike","Rating","n-AFC (2,4,6)" when user starts survey.
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -44,3 +47,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+

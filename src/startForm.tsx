@@ -66,7 +66,7 @@ const Forms = () => {
   const handleSelectChange = (event: any) => {
     setNationality(event.target.value);
   };
-  const numbers = [6, 2, 4];
+  const numbers = [0,1, 2, 4, 6];
   // Randomly select an integer from the array
   const randomIndex = Math.floor(Math.random() * numbers.length);
   const nAFC = numbers[randomIndex];
@@ -162,7 +162,7 @@ const Forms = () => {
             sx={{ mt: 2, fontWeight: 700 }}
             variant="contained"
             component={Link}
-            to="/question"
+            to="/questions"
             state={{
               age: age,
               gender: gender,

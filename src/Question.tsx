@@ -66,7 +66,7 @@ const Question = () => {
 
   useEffect(() => {
     questionArrayCreation();
-    console.log(questions, "questions");
+    // console.log(questions, "questions");
     setRatingCondition(state.condition);
   }, [state.condition]);
 
