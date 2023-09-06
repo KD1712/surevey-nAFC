@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Box, Button, LinearProgress, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Box, Button, LinearProgress, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // import question1 from '/assets/image1.png';
 // import question2 from '/assets/image2.png';
@@ -81,7 +81,7 @@ const RatingQuestion = () => {
   >([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion]: any = useState({});
-  const [ratingcondition, setRatingCondition]: any = useState("");
+  const [ratingcondition, setRatingCondition]: any = useState('');
 
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -96,10 +96,10 @@ const RatingQuestion = () => {
 
   useEffect(() => {
     if (currentQuestionIndex === questions.length) {
-      navigate("/endForm", {
+      navigate('/endForm', {
         state: {
           ...state,
-          condition: state.condition === 0 ? "LikeDislike" : "Rating",
+          condition: state.condition === 0 ? 'LikeDislike' : 'Rating',
           responses: responses,
         },
       });
@@ -118,10 +118,10 @@ const RatingQuestion = () => {
 
   useEffect(() => {
     if (timer === 0) {
-      navigate("/endForm", {
+      navigate('/endForm', {
         state: {
           ...state,
-          condition: state.condition === 0 ? "LikeDislike" : "Rating",
+          condition: state.condition === 0 ? 'LikeDislike' : 'Rating',
           ...responses,
         },
       });
@@ -136,11 +136,11 @@ const RatingQuestion = () => {
         responseTime: currentTime,
         answer: action,
         fName1: questions[currentQuestionIndex].image,
-        fName2: "",
-        fName3: "",
-        fName4: "",
-        fName5: "",
-        fName6: "",
+        fName2: '',
+        fName3: '',
+        fName4: '',
+        fName5: '',
+        fName6: '',
       };
       //add image name, user's age, nationality,
       setResponses((prevResponses) => [...prevResponses, response]);
@@ -151,7 +151,7 @@ const RatingQuestion = () => {
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
   const calculateProgress = () => {
@@ -167,11 +167,11 @@ const RatingQuestion = () => {
         responseTime: currentTime,
         answer: value,
         fName1: questions[currentQuestionIndex].image,
-        fName2: "",
-        fName3: "",
-        fName4: "",
-        fName5: "",
-        fName6: "",
+        fName2: '',
+        fName3: '',
+        fName4: '',
+        fName5: '',
+        fName6: '',
       };
       //add image name, user's age, nationality,
       setResponses((prevResponses) => [...prevResponses, response]);
@@ -181,43 +181,57 @@ const RatingQuestion = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         // mt: 2,
+        width: '100%',
       }}
     >
-      <Typography variant="h4" component="h2" gutterBottom sx={{ mt: 4 }}>
+      <Typography variant='h4' component='h2' gutterBottom sx={{ mt: 4 }}>
         Question
       </Typography>
 
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          mt: 4,
+          height: { xs: 'auto', md: '60vh' },
+          width: { xs: 'auto', sm: '100%' },
+        }}
+      >
         <img
           src={currentQuestion.image}
           alt={`Question ${currentQuestion.id}`}
           style={{
-            height: 400,
-            width: theme.breakpoints.only("md") ? "80%" : "100%",
-            border: "1.5px solid black",
+            // height: 400,
+            // width: theme.breakpoints.only('md') ? '80%' : '100%',
+            border: '1.5px solid black',
+            objectFit: 'contain',
+            maxWidth: '100%',
+            maxHeight: '80%',
+            width: 'auto',
+            height: 'auto',
           }}
         />
       </Box>
       {ratingcondition === 0 ? (
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
           <Button
-            variant="contained"
-            color="success"
-            size="large"
+            variant='contained'
+            color='success'
+            size='large'
             sx={{ fontWeight: 700 }}
-            onClick={() => handleLikeDislike("Like")}
+            onClick={() => handleLikeDislike('Like')}
           >
             Like 👍
           </Button>
           <Button
-            variant="contained"
-            color="error"
-            size="large"
-            onClick={() => handleLikeDislike("Dislike")}
+            variant='contained'
+            color='error'
+            size='large'
+            onClick={() => handleLikeDislike('Dislike')}
             sx={{ ml: 2, fontWeight: 700 }}
           >
             Dislike 👎
@@ -226,11 +240,11 @@ const RatingQuestion = () => {
       ) : (
         <Box
           sx={{
-            display: "flex",
-            width: "100%",
-            flexWrap: theme.breakpoints.only("sm") ? "wrap" : "none",
-            alignItems: "center",
-            justifyContent: "center",
+            display: 'flex',
+            width: '100%',
+            flexWrap: theme.breakpoints.only('sm') ? 'wrap' : 'none',
+            alignItems: 'center',
+            justifyContent: 'center',
             // mt: 2,
             p: 1,
           }}
@@ -238,21 +252,21 @@ const RatingQuestion = () => {
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
             <Button
               key={value}
-              variant="contained"
-              size="small"
+              variant='contained'
+              size='small'
               // color={ratingMethod === "star" ? "secondary" : "primary"}
               onClick={() => handleRatingChange(value)}
               sx={{
-                marginTop: ".3rem",
-                marginLeft: ".3rem",
-                backgroundColor: "white",
-                color: "black",
-                fontSize: "20px",
-                fontWeight: "700",
-                border: "1px solid black",
-                "&:hover": {
-                  backgroundColor: "lightblue",
-                  boxShadow: "none",
+                marginTop: '.3rem',
+                marginLeft: '.3rem',
+                backgroundColor: 'white',
+                color: 'black',
+                fontSize: '20px',
+                fontWeight: '700',
+                border: '1px solid black',
+                '&:hover': {
+                  backgroundColor: 'lightblue',
+                  boxShadow: 'none',
                 },
               }}
             >
@@ -264,18 +278,18 @@ const RatingQuestion = () => {
 
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          position: "fixed",
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          position: 'fixed',
           top: 20,
-          right: theme.breakpoints.down("md") ? 25 : 100,
+          right: theme.breakpoints.down('md') ? 25 : 100,
           p: 1,
-          backgroundColor: "lightgray",
+          backgroundColor: 'lightgray',
           borderRadius: 4,
         }}
       >
-        <Typography variant="body1" sx={{ fontSize: 26 }}>
+        <Typography variant='body1' sx={{ fontSize: 26 }}>
           {formatTime(timer)}
         </Typography>
       </Box>
@@ -286,9 +300,9 @@ const RatingQuestion = () => {
         </Typography>
       </Box> */}
       <LinearProgress
-        variant="determinate"
+        variant='determinate'
         value={calculateProgress()}
-        sx={{ mt: 2, width: "50%", height: ".5rem" }}
+        sx={{ mt: 2, width: '50%', height: '.5rem' }}
       />
     </Box>
   );

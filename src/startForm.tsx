@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -6,15 +6,16 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  InputLabel,
   MenuItem,
   Radio,
   RadioGroup,
   Select,
   TextField,
   Typography,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Country {
   text: string;
@@ -22,27 +23,27 @@ interface Country {
 }
 
 const Forms = () => {
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
-  const [education, setEducation] = useState("");
-  const [nationality, setNationality] = useState("");
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
+  const [education, setEducation] = useState('');
+  const [nationality, setNationality] = useState('');
   // const [myData, setMyData] = React.useState([{}]);
   const [countries, setCountries] = useState<Country[]>([]);
   // const [selectedCountry, setSelectedCountry] = useState("");
   // const [ratingcondition, setRatingCondition]: any = useState("");
-  const [timestamp, setTimestamp] = useState("");
+  const [timestamp, setTimestamp] = useState('');
 
   useEffect(() => {
     // setRatingCondition(Math.random() < 0.5 ? "likeDislike" : "ratings");
     // setTimestamp(new Date().toLocaleString())
     const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      timeZoneName: "short",
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZoneName: 'short',
     } as Intl.DateTimeFormatOptions;
 
     const formattedTime = new Date().toLocaleString([], options);
@@ -54,19 +55,17 @@ const Forms = () => {
   };
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        "https://trial.mobiscroll.com/content/countries.json"
-      );
+      const response = await fetch('https://trial.mobiscroll.com/content/countries.json');
       const data = await response.json();
       setCountries(data as Country[]);
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     }
   };
   const handleSelectChange = (event: any) => {
     setNationality(event.target.value);
   };
-  const numbers = [0,1, 2, 4, 6];
+  const numbers = [0, 1, 2, 4, 6];
   // Randomly select an integer from the array
   const randomIndex = Math.floor(Math.random() * numbers.length);
   const nAFC = numbers[randomIndex];
@@ -80,61 +79,55 @@ const Forms = () => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         mt: { xs: 2, sm: 15, md: 15, lg: 15 },
       }}
     >
       <Typography
-        variant="h4"
-        component="h2"
+        variant='h4'
+        component='h2'
         // gutterBottom
-        sx={{ textAlign: "center", fontSize: { xs: 23 } }}
+        sx={{ textAlign: 'center', fontSize: { xs: 23 } }}
       >
         Tell us a bit about yourself
       </Typography>
-      <form onSubmit={handleSubmit} style={{ width: "300px", marginTop: 4 }}>
+      <form onSubmit={handleSubmit} style={{ width: '300px', marginTop: 4 }}>
         <TextField
-          label="Age"
-          variant="outlined"
-          type="number"
+          label='Age'
+          variant='outlined'
+          type='number'
           value={age}
           onChange={(event) => setAge(event.target.value)}
           required
           fullWidth
-          margin="normal"
+          margin='normal'
         />
-        <FormControl component="fieldset" margin="normal" required>
-          <FormLabel component="legend">Gender</FormLabel>
+        <FormControl component='fieldset' margin='normal' required>
+          <FormLabel component='legend'>Gender</FormLabel>
           <RadioGroup
-            aria-label="gender"
+            aria-label='gender'
             value={gender}
             onChange={(event) => setGender(event.target.value)}
             row
           >
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
+            <FormControlLabel value='male' control={<Radio />} label='Male' />
+            <FormControlLabel value='female' control={<Radio />} label='Female' />
+            <FormControlLabel value='other' control={<Radio />} label='Other' />
           </RadioGroup>
         </FormControl>
-        <FormControl variant="outlined" margin="normal" fullWidth required>
-          <FormLabel component="legend">
-            Highest Education Qualification
-          </FormLabel>
+        <FormControl variant='outlined' margin='normal' fullWidth required>
+          <InputLabel>Highest Education Qualification</InputLabel>
           <Select
             value={education}
             onChange={(event) => setEducation(event.target.value as string)}
-            label="Highest Education Qualification"
+            label='Highest Education Qualification'
             required
           >
-            <MenuItem value="school">School</MenuItem>
-            <MenuItem value="college">College</MenuItem>
-            <MenuItem value="master">Master or Higher</MenuItem>
+            <MenuItem value='school'>School</MenuItem>
+            <MenuItem value='college'>College</MenuItem>
+            <MenuItem value='master'>Master or Higher</MenuItem>
           </Select>
         </FormControl>
         {/* <TextField
@@ -146,8 +139,8 @@ const Forms = () => {
           fullWidth
           margin="normal"
         /> */}
-        <FormControl variant="outlined" margin="normal" fullWidth required>
-          <FormLabel component="legend">Nationality</FormLabel>
+        <FormControl variant='outlined' margin='normal' fullWidth required>
+          <FormLabel component='legend'>Nationality</FormLabel>
 
           <Select value={nationality} onChange={handleSelectChange}>
             {countries.map((country, index) => (
@@ -160,9 +153,9 @@ const Forms = () => {
         {age && gender && nationality && education ? (
           <Button
             sx={{ mt: 2, fontWeight: 700 }}
-            variant="contained"
+            variant='contained'
             component={Link}
-            to="/questions"
+            to='/questions'
             state={{
               age: age,
               gender: gender,
@@ -173,14 +166,14 @@ const Forms = () => {
               sessionId: uuidv4(),
               condition: nAFC,
             }}
-            color="primary"
-            type="submit"
+            color='primary'
+            type='submit'
             fullWidth
           >
             Start
           </Button>
         ) : (
-          <Button variant="contained" fullWidth disabled>
+          <Button variant='contained' fullWidth disabled>
             Start
           </Button>
         )}
